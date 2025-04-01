@@ -2,9 +2,10 @@ import axios from "axios";
 
 const BASE_URL = "https://techhk.aoscdn.com/";
 const MAXIMUM_RETRIES = 20;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const enhancedImageAPI = async (file) => {
-  console.log(process.env.API_KEY, "api");
+  console.log(import.meta.env.VITE_API_KEY, "api");
   try {
     const taskId = await uploadImage(file);
     console.log("Image Uploaded Successfully, Task ID:", taskId);
@@ -28,7 +29,7 @@ const uploadImage = async (file) => {
     {
       headers: {
         "Content-Type": "multipart/form-data",
-        "X-API-KEY": process.env.API_KEY,
+        "X-API-KEY": API_KEY,
       },
     }
   );
@@ -64,7 +65,7 @@ const fetchEnhancedImage = async (taskId) => {
     `${BASE_URL}/api/tasks/visual/scale/${taskId}`,
     {
       headers: {
-        "X-API-KEY": process.env.API_KEY,
+        "X-API-KEY": API_KEY,
       },
     }
   );
